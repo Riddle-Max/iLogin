@@ -37,7 +37,7 @@ void AppUI::showReplyInfo(Data info){
         switch(info.resultCode){
         case 0:
         case 11:
-            QMessageBox::information(this,tr("登陆"),tr("登陆成功"),QMessageBox::Ok);
+            //QMessageBox::information(this,tr("登陆"),tr("登陆成功"),QMessageBox::Ok);
             ui->totalflow->setText(info.totalflow);             //设置总流量
             ui->usedflow->setText(info.usedflow);               //设置使用流量
             ui->surplusmoney->setText(info.surplusmoney);       //设置余额
