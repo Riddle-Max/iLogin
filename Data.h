@@ -2,6 +2,8 @@
 #define DATA_H
 #include<QString>
 
+//NetAccess和AppUI交换信息的数据格式
+
 struct Data{
     enum Action{LOGIN,LOGOUT};
     Action action;
