@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "Data.h"
+#include <QSystemTrayIcon>
 
 namespace Ui {
 class AppUI;
@@ -24,6 +25,7 @@ signals:
     void quitClicked();                                         //退出信号
 public slots:
     void showReplyInfo(Data info);
+    void show(QSystemTrayIcon::ActivationReason);
 private slots:
     void clickLogin();
     void checkRememberPasswd();

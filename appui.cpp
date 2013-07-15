@@ -7,6 +7,7 @@
 //#include <QPainter>
 #include <QMenu>
 
+
 AppUI::AppUI(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AppUI)
@@ -64,6 +65,14 @@ void AppUI::showReplyInfo(Data info){
             QMessageBox::warning(this,tr("注销"),info.resultDescribe,QMessageBox::Ok);
             break;
         }
+    }
+}
+
+void AppUI::show(QSystemTrayIcon::ActivationReason action){
+    switch(action){
+    case QSystemTrayIcon::Trigger:
+        QDialog::show();
+        break;
     }
 }
 
