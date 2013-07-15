@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>res/bg.jpg</file>
         <file>res/icon.ico</file>
         <file>res/security.js</file>
+        <file>res/logo.ico</file>
     </qresource>
 </RCC>
