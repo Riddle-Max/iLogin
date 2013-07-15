@@ -3,13 +3,14 @@
 #include "netaccess.h"
 #include <QMenu>
 #include <QApplication>
+#include <QIcon>
 
 SystemTrayIcon::SystemTrayIcon(QObject *parent):
     QSystemTrayIcon(parent)
 {
     m_appUi = new AppUI();
     m_netAccess = new NetAccess("http://www.csu.edu.cn",this);
-    this->setIcon(QIcon(":/res/icon.ico"));
+    setIcon(QIcon(":/res/icon.ico"));
     QMenu *menu = new QMenu();
     menu->addAction(tr("show"),m_appUi,SLOT(show()));
     menu->addAction(tr("exit"),this,SLOT(quitApp()));
