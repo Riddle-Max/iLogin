@@ -31,7 +31,7 @@ private slots:
 protected:
     void mouseMoveEvent(QMouseEvent *);                         //重载UI拖动函数
     void mousePressEvent(QMouseEvent *);
-    void paintEvent(QPaintEvent *);                             //重载UI背景绘制函数
+    //void paintEvent(QPaintEvent *);                             //重载UI背景绘制函数
 private:
     void getConfig();       //获取配置信息
     void setConfig();       //存储配置信息  
@@ -39,7 +39,7 @@ private:
     QPoint m_pointStart;    //起点坐标
     QPoint m_pointPress;    //终点坐标
     QSettings *m_config;    //配置信息
-    QPixmap m_bgpixmap;     //界面背景
+    //QPixmap m_bgpixmap;     //界面背景
 };
 
 #endif // APPUI_H

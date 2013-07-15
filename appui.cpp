@@ -4,7 +4,7 @@
 #include <QSettings>
 #include <QMessageBox>
 #include <QVariant>
-#include <QPainter>
+//#include <QPainter>
 #include <QMenu>
 
 AppUI::AppUI(QWidget *parent) :
@@ -14,7 +14,7 @@ AppUI::AppUI(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::FramelessWindowHint);
     m_config = new QSettings(QSettings::UserScope,qApp->organizationName(),qApp->applicationName(),this);
-    m_bgpixmap.load(":/res/bg.jpg");
+   // m_bgpixmap.load(":/res/bg.jpg");
     setWindowIcon(QIcon(":/res/icon.ico"));
     getConfig();
     QMenu *menu = new QMenu(this);
@@ -78,12 +78,12 @@ void AppUI::mousePressEvent(QMouseEvent *e)
     m_pointStart = m_pointPress - this->pos();
 
 }
-
+/*
 void AppUI::paintEvent(QPaintEvent *){
     QPainter painter(this);
     painter.drawPixmap(m_bgpixmap.rect(),m_bgpixmap);
 }
-
+*/
 void AppUI::clickLogin(){
     if(ui->lineEdit_a->text().length()==0||ui->lineEdit_p->text().length()==0){
         QMessageBox::warning(this,tr("输入不能为空"),tr("账号或者密码不能为空！"),QMessageBox::Ok);
@@ -99,7 +99,7 @@ void AppUI::checkRememberPasswd(){
 }
 
 void AppUI::aboutThis(){
-    QMessageBox::about(this,tr("about this software"),tr("iLogin v1.0<br>Based on Qt 5.1,under GPLv3 licence"));
+    QMessageBox::about(this,tr("about this software"),tr("<br>iLogin v1.0,from Riddle_max<br>Based on Qt 5.1,under GPLv3 licence"));
 }
 
 void AppUI::getConfig(){
