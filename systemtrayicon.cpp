@@ -9,7 +9,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *parent):
     QSystemTrayIcon(parent)
 {
     m_appUi = new AppUI();
-    m_netAccess = new NetAccess("http://www.csu.edu.cn",this);
+    m_netAccess = new NetAccess(this);
     setIcon(QIcon(":/res/icon.ico"));
     connect(m_appUi,SIGNAL(quitClicked()),this,SLOT(quitApp()));
     connect(m_appUi,SIGNAL(loginClicked(QString,QString)),m_netAccess,SLOT(login(QString,QString)));

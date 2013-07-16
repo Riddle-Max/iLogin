@@ -10,20 +10,13 @@
 #include <QDebug>
 
 
-NetAccess::NetAccess(const QString &location,QObject *parent) :
-    QObject(parent),m_location(location),m_logState(false),m_hasCookie(false)
+NetAccess::NetAccess(QObject *parent) :
+    QObject(parent),m_logState(false),m_hasCookie(false)
 {
     m_netaccess = new QNetworkAccessManager(this);//初始化连接器
     m_cookiejar = new QNetworkCookieJar(this);//初始化cookiejar
-    m_request.setUrl(QUrl(m_location));//初始化连接请求
     m_loop = new QEventLoop(this);//初始化事件循环
     connect(m_netaccess,SIGNAL(finished(QNetworkReply*)),this,SLOT(ServerReplyHandler(QNetworkReply*)));
-    m_netaccess->get(m_request);
-    m_loop->exec();
-    m_netaccess->get(m_request);
-    m_loop->exec();
-    m_netaccess->get(m_request);
-    m_loop->exec();
 }
 
 bool NetAccess::getLogState(){
@@ -31,6 +24,7 @@ bool NetAccess::getLogState(){
 }
 
 void NetAccess::login(QString userId,QString userPass){
+    getInitArgument();
     m_request.setUrl(QUrl("http://61.137.86.87:8080/portalNat444/AccessServices/login"));
     m_request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded;charset=utf-8");
     m_request.setRawHeader(QByteArray("Referer"),QByteArray("http://61.137.86.87:8080/portalNat444/index.jsp"));
@@ -51,7 +45,7 @@ void NetAccess::logout(){
 void NetAccess::ServerReplyHandler(QNetworkReply *reply){//处理来自服务器的响应
     m_loop->exit();                     //结束事件循环
     if(reply->error()!=QNetworkReply::NoError){ //如果响应有误则退出
-        QMessageBox::critical(0,"Error","Unknown Error!Maybe you have logined.\nCheck whether you can open a website.",QMessageBox::Ok);
+        QMessageBox::critical(0,"Error","Unknown Error!\nThe Application will be closed.",QMessageBox::Ok);
         disconnect(m_netaccess,SIGNAL(finished(QNetworkReply*)),this,SLOT(ServerReplyHandler(QNetworkReply*)));
         exit(1);
     }
@@ -67,6 +61,16 @@ void NetAccess::ServerReplyHandler(QNetworkReply *reply){//处理来自服务器
         logoutReply(reply);
         return;
     }
+}
+
+void NetAccess::getInitArgument(){
+    m_request.setUrl(QUrl("http://www.csu.edu.cn"));//初始化连接请求
+    m_netaccess->get(m_request);
+    m_loop->exec();
+    m_netaccess->get(m_request);
+    m_loop->exec();
+    m_netaccess->get(m_request);
+    m_loop->exec();
 }
 
 void NetAccess::loginReply(QNetworkReply *reply){//登陆响应处理函数

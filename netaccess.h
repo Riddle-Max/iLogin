@@ -13,7 +13,7 @@ class NetAccess : public QObject
     Q_OBJECT
 
 public:
-    explicit NetAccess(const QString &,QObject *parent = 0);
+    explicit NetAccess(QObject *parent = 0);
     bool getLogState();  
 signals:
     void replyLogin(Data replyInfo); //获取响应代码
@@ -24,6 +24,7 @@ public slots:
 private slots:
     void ServerReplyHandler(QNetworkReply*);      //初始化响应处理槽
 private:
+    void getInitArgument();                                  //获取登陆初始参数
     void loginReply(QNetworkReply *);                        //登陆响应
     void initGetReply(QNetworkReply *);                      //初始化时Get的响应，获取Cookie
     void logoutReply(QNetworkReply *);                       //注销响应
