@@ -108,7 +108,7 @@ void AppUI::checkRememberPasswd(){
 }
 
 void AppUI::aboutThis(){
-    QMessageBox::about(this,tr("about this software"),tr("<br>iLogin v1.0,from Riddle_max<br>Based on Qt 5.1,under GPLv3 licence"));
+    QMessageBox::about(this,tr("about this software"),tr("<br>iLogin v1.0,from Riddle Lei<br>Based on Qt 5.1,under GPLv3 licence"));
 }
 
 void AppUI::getConfig(){
