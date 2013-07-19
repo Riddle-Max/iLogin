@@ -44,10 +44,8 @@ void NetAccess::logout(){
 
 void NetAccess::ServerReplyHandler(QNetworkReply *reply){//处理来自服务器的响应
     m_loop->exit();                     //结束事件循环
-    if(reply->error()!=QNetworkReply::NoError){ //如果响应有误则退出
-        QMessageBox::critical(0,"Error","Unknown Error!\nThe Application will be closed.",QMessageBox::Ok);
-        disconnect(m_netaccess,SIGNAL(finished(QNetworkReply*)),this,SLOT(ServerReplyHandler(QNetworkReply*)));
-        exit(1);
+    if(reply->error()!=QNetworkReply::NoError){ //如果响应有误则退出    
+        throw reply->errorString();
     }
     if(m_hasCookie==false&&m_logState==false){   //无cookie以及无登陆则为初始化响应
         initGetReply(reply);
@@ -64,6 +62,7 @@ void NetAccess::ServerReplyHandler(QNetworkReply *reply){//处理来自服务器
 }
 
 void NetAccess::getInitArgument(){
+  try{
     m_request.setUrl(QUrl("http://www.csu.edu.cn"));//初始化连接请求
     m_netaccess->get(m_request);
     m_loop->exec();
@@ -71,6 +70,10 @@ void NetAccess::getInitArgument(){
     m_loop->exec();
     m_netaccess->get(m_request);
     m_loop->exec();
+   }
+    catch(QString err){
+      QMessageBox::critical(0,"Error",err,QMessageBox::Ok);
+    }
 }
 
 void NetAccess::loginReply(QNetworkReply *reply){//登陆响应处理函数
