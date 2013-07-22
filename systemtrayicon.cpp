@@ -10,7 +10,7 @@ SystemTrayIcon::SystemTrayIcon(QObject *parent):
 {
     m_appUi = new AppUI();
     m_netAccess = new NetAccess(this);
-    setIcon(QIcon(":/res/icon.ico"));
+    setIcon(QIcon(":/res/icon.png"));
     connect(m_appUi,SIGNAL(quitClicked()),this,SLOT(quitApp()));
     connect(m_appUi,SIGNAL(loginClicked(QString,QString)),m_netAccess,SLOT(login(QString,QString)));
     connect(m_appUi,SIGNAL(logoutClicked()),m_netAccess,SLOT(logout()));
