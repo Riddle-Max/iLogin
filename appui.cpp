@@ -39,9 +39,9 @@ void AppUI::showReplyInfo(Data info){
         case 0:
         case 11:
             //QMessageBox::information(this,tr("登陆"),tr("登陆成功"),QMessageBox::Ok);
-            ui->totalflow->setText(info.totalflow);             //设置总流量
-            ui->usedflow->setText(info.usedflow);               //设置使用流量
-            ui->surplusmoney->setText(info.surplusmoney);       //设置余额
+            ui->totalflow->setText(info.totalflow.length()==0?"null":info.totalflow);             //设置总流量
+            ui->usedflow->setText(info.usedflow.length()==0?"null":info.usedflow);               //设置使用流量
+            ui->surplusmoney->setText(info.surplusmoney.length()==0?"null":info.surplusmoney);       //设置余额
             ui->stackedWidget->setCurrentIndex(1);   //用于改变StackWidget当前界面
             break;
         default:
